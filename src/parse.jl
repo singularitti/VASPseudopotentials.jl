@@ -12,10 +12,11 @@ function Base.tryparse(::Type{PotentialName}, str::AbstractString)
     end
     element = Symbol(head_match[1])
     num_str = head_match[2]
-    num_electrons = num_str === nothing ? nothing : Base.parse(Float64, num_str)
+    num_electrons =
+        num_str === nothing ? nothing : NumberOfElectrons(Base.parse(Float64, num_str))
     hard_soft = if occursin("_h", str)
         Hard()
-    elseif occursin("_s", str)
+    elseif endswith(str, "_s")
         Soft()
     else
         nothing
