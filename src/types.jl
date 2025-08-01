@@ -34,20 +34,14 @@ abstract type NewOld end
 struct New <: NewOld end
 struct Old <: NewOld end
 
-struct NumElectrons
-    num::Float64
-end
-
-struct PotentialSummary
+struct PotentialName
     element::Symbol
-    exchange_correlation::ExchangeCorrelation
     method::Maybe{Method}
     pseudization::Maybe{Pseudization}
     valence_states::Maybe{ValenceStates}
-    ne::Maybe{NumElectrons}
+    num_electrons::Maybe{Float64}
     hard_soft::Maybe{HardSoft}
     new_old::Maybe{NewOld}
-    version::VersionNumber
 end
 
 suffix(::Standard) = ""
@@ -62,7 +56,7 @@ suffix(::Soft) = "_s"
 suffix(::New) = "_new"
 suffix(::Old) = ""
 
-Base.show(io::IO, item::PotentialSummary) = print(
+Base.show(io::IO, item::PotentialName) = print(
     io,
     item.element,
     suffix(item.pseudization),
