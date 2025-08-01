@@ -2,5 +2,5 @@ using VASPseudopotentials
 using Test
 
 @testset "VASPseudopotentials.jl" begin
-    # Write your tests here.
+    include("parse.jl")
 end
