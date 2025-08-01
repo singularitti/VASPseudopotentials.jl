@@ -31,9 +31,9 @@ abstract type Rigidity end
 struct Hard <: Rigidity end
 struct Soft <: Rigidity end
 
-abstract type NewOld end
-struct New <: NewOld end
-struct Old <: NewOld end
+abstract type Generation end
+struct New <: Generation end
+struct Old <: Generation end
 
 struct PotentialName
     element::Symbol
@@ -42,7 +42,7 @@ struct PotentialName
     valence_states::Maybe{ValenceStates}
     hard_soft::Maybe{Rigidity}
     method::Maybe{Method}
-    new_old::Maybe{NewOld}
+    new_old::Maybe{Generation}
 end
 
 Base.show(io::IO, x::NumberOfElectrons) =
