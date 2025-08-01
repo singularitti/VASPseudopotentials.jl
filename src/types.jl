@@ -44,9 +44,12 @@ struct PotentialName
     new_old::Maybe{NewOld}
 end
 
-suffix(::Standard) = ""
+suffix(::Nothing) = ""
+suffix(::Method) = ""
 suffix(::GreenFunction) = "_GW"
+suffix(::Pseudization) = ""
 suffix(::AllElectron) = "_AE"
+suffix(::ValenceStates) = ""
 suffix(::SemicoreP) = "_pv"
 suffix(::SemicoreD) = "_d"
 suffix(::SemicorePS) = "_sv"
