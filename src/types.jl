@@ -34,10 +34,10 @@ struct Old <: NewOld end
 struct PotentialName
     element::Symbol
     num_electrons::Maybe{Float64}
-    method::Maybe{Method}
     pseudization::Maybe{Pseudization}
     valence_states::Maybe{ValenceStates}
     hard_soft::Maybe{HardSoft}
+    method::Maybe{Method}
     new_old::Maybe{NewOld}
 end
 
@@ -54,13 +54,11 @@ Base.show(io::IO, ::Hard) = print(io, "_h")
 Base.show(io::IO, ::Soft) = print(io, "_s")
 Base.show(io::IO, ::New) = print(io, "_new")
 Base.show(io::IO, ::Old) = print(io, "")
-Base.show(io::IO, item::PotentialName) = print(
-    io,
-    item.element,
-    item.num_electrons,
-    item.pseudization,
-    item.valence_states,
-    item.hard_soft,
-    item.method,
-    item.new_old,
-)
+function Base.show(io::IO, item::PotentialName)
+    for field in fieldnames(typeof(item))
+        if getfield(item, field) !== nothing
+            print(io, getfield(item, field))
+        end
+    end
+    return nothing
+end

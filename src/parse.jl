@@ -37,7 +37,7 @@ function Base.tryparse(::Type{PotentialName}, str::AbstractString)
     method = occursin("_GW", str) ? GW() : nothing
     new_old = occursin("_new", str) ? New() : nothing
     return PotentialName(
-        element, method, pseudization, valence_states, num_electrons, hard_soft, new_old
+        element, num_electrons, pseudization, valence_states, hard_soft, method, new_old
     )
 end
 
