@@ -26,6 +26,7 @@ struct SemicoreP <: ValenceStates end
 struct SemicoreD <: ValenceStates end
 struct SemicorePS <: ValenceStates end
 struct Lanthanides{N} <: ValenceStates end
+Lanthanides(N::Integer) = Lanthanides{N}()
 
 abstract type Rigidity end
 struct Hard <: Rigidity end

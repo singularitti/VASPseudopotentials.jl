@@ -30,7 +30,7 @@ function Base.tryparse(::Type{PotentialName}, str::AbstractString)
         SemicoreD()
     elseif lanthanide_match !== nothing
         # Match lanthanide suffixes like _2 or _3, ensuring they are whole suffixes
-        Lanthanides{parse(Int64, lanthanide_match[1])}()
+        Lanthanides(parse(Int8, lanthanide_match[1]))
     else
         nothing
     end
