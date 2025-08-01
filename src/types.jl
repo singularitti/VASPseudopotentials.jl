@@ -10,7 +10,7 @@ const LDA = LocalDensityApproximation
 const PBE = PerdewBurkeErnzerhof
 
 struct NumberOfElectrons
-    value::Maybe{Float64}
+    value::Float64
 end
 
 abstract type Method end
