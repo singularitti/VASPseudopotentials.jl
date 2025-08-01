@@ -42,10 +42,12 @@ function Base.tryparse(::Type{PotentialName}, str::AbstractString)
     )
 end
 
-function Base.parse(::Type{PotentialName}, str::AbstractString)
-    result = tryparse(PotentialName, str)
+function Base.parse(
+    ::Type{T}, str::AbstractString
+) where {T<:Union{ElectronConfiguration,PotentialName}}
+    result = tryparse(T, str)
     if result === nothing
-        throw(ParseError("could not parse potential name: \"$str\"!"))
+        throw(ParseError("could not parse type `$T` from \"$str\"!"))
     end
     return result
 end
