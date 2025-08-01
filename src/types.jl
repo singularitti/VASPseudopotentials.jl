@@ -1,4 +1,4 @@
-export PBE, LDA, GW, Hard, Soft
+export PBE, LDA, GW, Hard, Soft, PotentialName
 
 const Maybe{T} = Union{T,Nothing}
 
@@ -10,15 +10,12 @@ const LDA = LocalDensityApproximation
 const PBE = PerdewBurkeErnzerhof
 
 abstract type Method end
-struct Standard <: Method end
 struct GreenFunction <: Method end
 const GW = GreenFunction
 
 abstract type Pseudization end
-abstract type AllElectron <: Pseudization end
-abstract type ProjectorAugmentedWaves <: AllElectron end
+struct AllElectron <: Pseudization end
 const AE = AllElectron
-const PAW = ProjectorAugmentedWaves
 
 abstract type ValenceStates end
 struct SemicoreP <: ValenceStates end
