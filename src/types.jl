@@ -41,27 +41,26 @@ struct PotentialName
     new_old::Maybe{NewOld}
 end
 
-suffix(::Nothing) = ""
-suffix(::Method) = ""
-suffix(::GreenFunction) = "_GW"
-suffix(::Pseudization) = ""
-suffix(::AllElectron) = "_AE"
-suffix(::ValenceStates) = ""
-suffix(::SemicoreP) = "_pv"
-suffix(::SemicoreD) = "_d"
-suffix(::SemicorePS) = "_sv"
-suffix(::Lanthanides{N}) where {N} = "_$N"
-suffix(::Hard) = "_h"
-suffix(::Soft) = "_s"
-suffix(::New) = "_new"
-suffix(::Old) = ""
-
+Base.show(io::IO, ::Method) = print(io, "")
+Base.show(io::IO, ::GreenFunction) = print(io, "_GW")
+Base.show(io::IO, ::Pseudization) = print(io, "")
+Base.show(io::IO, ::AllElectron) = print(io, "_AE")
+Base.show(io::IO, ::ValenceStates) = print(io, "")
+Base.show(io::IO, ::SemicoreP) = print(io, "_pv")
+Base.show(io::IO, ::SemicoreD) = print(io, "_d")
+Base.show(io::IO, ::SemicorePS) = print(io, "_sv")
+Base.show(io::IO, ::Lanthanides{N}) where {N} = print(io, "_$N")
+Base.show(io::IO, ::Hard) = print(io, "_h")
+Base.show(io::IO, ::Soft) = print(io, "_s")
+Base.show(io::IO, ::New) = print(io, "_new")
+Base.show(io::IO, ::Old) = print(io, "")
 Base.show(io::IO, item::PotentialName) = print(
     io,
     item.element,
-    suffix(item.pseudization),
-    suffix(item.valence_states),
-    suffix(item.hard_soft),
-    suffix(item.method),
-    suffix(item.new_old),
+    item.num_electrons,
+    item.pseudization,
+    item.valence_states,
+    item.hard_soft,
+    item.method,
+    item.new_old,
 )
