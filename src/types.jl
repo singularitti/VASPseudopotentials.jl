@@ -40,9 +40,9 @@ struct PotentialName
     num_electrons::Maybe{NumberOfElectrons}
     pseudization::Maybe{Pseudization}
     valence_states::Maybe{ValenceStates}
-    hard_soft::Maybe{Rigidity}
+    rigidity::Maybe{Rigidity}
     method::Maybe{Method}
-    new_old::Maybe{Generation}
+    generation::Maybe{Generation}
 end
 
 Base.show(io::IO, x::NumberOfElectrons) =
