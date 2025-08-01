@@ -27,9 +27,9 @@ struct SemicoreD <: ValenceStates end
 struct SemicorePS <: ValenceStates end
 struct Lanthanides{N} <: ValenceStates end
 
-abstract type HardSoft end
-struct Hard <: HardSoft end
-struct Soft <: HardSoft end
+abstract type Rigidity end
+struct Hard <: Rigidity end
+struct Soft <: Rigidity end
 
 abstract type NewOld end
 struct New <: NewOld end
@@ -40,7 +40,7 @@ struct PotentialName
     num_electrons::Maybe{NumberOfElectrons}
     pseudization::Maybe{Pseudization}
     valence_states::Maybe{ValenceStates}
-    hard_soft::Maybe{HardSoft}
+    hard_soft::Maybe{Rigidity}
     method::Maybe{Method}
     new_old::Maybe{NewOld}
 end
