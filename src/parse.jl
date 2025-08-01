@@ -16,7 +16,7 @@ function Base.tryparse(::Type{PotentialName}, str::AbstractString)
         num_str === nothing ? nothing : NumberOfElectrons(Base.parse(Float64, num_str))
     hard_soft = if occursin("_h", str)
         Hard()
-    elseif endswith(str, "_s")
+    elseif occursin(r"_s\b", str)  # Not match `_sv`
         Soft()
     else
         nothing
