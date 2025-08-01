@@ -1,6 +1,10 @@
 const FLOAT_REGEX = r"((?:[0-9]*[.])?[0-9]+)?"
 const HEAD_REGEX = r"([a-zA-Z]+)" * FLOAT_REGEX
 
+struct ParseError <: Exception
+    msg::String
+end
+
 function Base.tryparse(::Type{PotentialName}, str::AbstractString)
     head_match = match(HEAD_REGEX, str)
     if head_match === nothing
@@ -36,3 +40,14 @@ function Base.tryparse(::Type{PotentialName}, str::AbstractString)
         element, method, pseudization, valence_states, num_electrons, hard_soft, new_old
     )
 end
+
+function Base.parse(::Type{PotentialName}, str::AbstractString)
+    result = tryparse(PotentialName, str)
+    if result === nothing
+        throw(ParseError("could not parse potential name: \"$str\"!"))
+    end
+    return result
+end
+
+# See https://github.com/JuliaLang/julia/blob/3903fa5/base/missing.jl#L18-L19
+Base.showerror(io::IO, ex::ParseError) = print(io, "ParseError: ", ex.msg, '!')
