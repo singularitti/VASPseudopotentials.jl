@@ -1084,7 +1084,7 @@ codegen/
 ### https://raw.github.com/github/gitignore/622c03138bc602b6834aaba64f3061d478c91333/Global/VisualStudioCode.gitignore
 
 .vscode/*
-!.vscode/settings.json
+.vscode/settings.json
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
