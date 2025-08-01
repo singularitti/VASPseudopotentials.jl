@@ -1,6 +1,8 @@
+using AnonymousEnums: @anonymousenum
+
 export AzimuthalQuantumNumber, ElectronConfiguration
 
-@enum AzimuthalQuantumNumber s p d f g h i
+@anonymousenum AzimuthalQuantumNumber::UInt8 s p d f g h i
 
 struct ElectronConfiguration
     principal::Int8
