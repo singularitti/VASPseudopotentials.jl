@@ -3,7 +3,11 @@ uuid = "a8aa8eba-0278-4e3a-8f77-14d2f4143e9c"
 authors = ["singularitti <singularitti@outlook.com> and contributors"]
 version = "1.0.0-DEV"
 
+[deps]
+AnonymousEnums = "1b8a1bdb-a29a-4350-a16c-c7e9322d6a39"
+
 [compat]
+AnonymousEnums = "0.1.1"
 julia = "1.6"
 
 [extras]
