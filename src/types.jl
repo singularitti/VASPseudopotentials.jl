@@ -36,10 +36,10 @@ struct Old <: NewOld end
 
 struct PotentialName
     element::Symbol
+    num_electrons::Maybe{Float64}
     method::Maybe{Method}
     pseudization::Maybe{Pseudization}
     valence_states::Maybe{ValenceStates}
-    num_electrons::Maybe{Float64}
     hard_soft::Maybe{HardSoft}
     new_old::Maybe{NewOld}
 end
