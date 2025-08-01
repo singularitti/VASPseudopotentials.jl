@@ -13,8 +13,8 @@ function Base.tryparse(::Type{PotentialName}, str::AbstractString)
     element = Symbol(head_match[1])
     num_str = head_match[2]
     num_electrons =
-        num_str === nothing ? nothing : NumberOfElectrons(Base.parse(Float64, num_str))
-    hard_soft = if occursin("_h", str)
+        num_str === nothing ? nothing : NumberOfElectrons(tryparse(Float64, num_str))
+    rigidity = if occursin("_h", str)
         Hard()
     elseif occursin(r"_s(\b|_)", str)  # Not match `_sv`
         Soft()
@@ -36,9 +36,9 @@ function Base.tryparse(::Type{PotentialName}, str::AbstractString)
     end
     pseudization = occursin("_AE", str) ? AE() : nothing
     method = occursin("_GW", str) ? GW() : nothing
-    new_old = occursin("_new", str) ? New() : nothing
+    generation = occursin("_new", str) ? New() : nothing
     return PotentialName(
-        element, num_electrons, pseudization, valence_states, hard_soft, method, new_old
+        element, num_electrons, pseudization, valence_states, rigidity, method, generation
     )
 end
 
