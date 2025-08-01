@@ -9,6 +9,10 @@ struct PerdewBurkeErnzerhof <: GeneralizedGradientApproximation end
 const LDA = LocalDensityApproximation
 const PBE = PerdewBurkeErnzerhof
 
+struct NumberOfElectrons
+    value::Maybe{Float64}
+end
+
 abstract type Method end
 struct GreenFunction <: Method end
 const GW = GreenFunction
@@ -33,7 +37,7 @@ struct Old <: NewOld end
 
 struct PotentialName
     element::Symbol
-    num_electrons::Maybe{Float64}
+    num_electrons::Maybe{NumberOfElectrons}
     pseudization::Maybe{Pseudization}
     valence_states::Maybe{ValenceStates}
     hard_soft::Maybe{HardSoft}
@@ -41,6 +45,8 @@ struct PotentialName
     new_old::Maybe{NewOld}
 end
 
+Base.show(io::IO, x::NumberOfElectrons) =
+    print(io, x.value < 1 ? string(x.value)[2:end] : x.value)  # Ignore the leading `0` for small numbers
 Base.show(io::IO, ::Method) = print(io, "")
 Base.show(io::IO, ::GreenFunction) = print(io, "_GW")
 Base.show(io::IO, ::Pseudization) = print(io, "")
