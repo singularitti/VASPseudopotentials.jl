@@ -1,4 +1,17 @@
-export PBE, LDA, GW, Hard, Soft, PotentialName
+export PBE,
+    LDA,
+    NumberOfElectrons,
+    GW,
+    AE,
+    SemicoreP,
+    SemicoreD,
+    SemicorePS,
+    Lanthanides,
+    Hard,
+    Soft,
+    New,
+    Old,
+    PotentialName
 
 const Maybe{T} = Union{T,Nothing}
 
@@ -49,7 +62,7 @@ valence electron count, and method-specific suffixes. Unspecified components can
 julia> PotentialName(:Si, nothing, nothing, nothing, nothing, nothing, nothing)
 Si
 
-julia> PotentialName(:Ti, nothing, nothing, nothing, Soft(), nothing, New())
+julia> PotentialName(:Ti, nothing, nothing, SemicorePS(), nothing, nothing, New())
 Ti_sv_new
 ```
 """
