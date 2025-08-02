@@ -1,10 +1,25 @@
 const FLOAT_REGEX = r"((?:[0-9]*[.])?[0-9]+)?"
 const HEAD_REGEX = r"([a-zA-Z]+)" * FLOAT_REGEX
 
+"""
+    ParseError <: Exception
+
+Exception thrown when parsing a `PotentialName` or `Subshell` from a string fails.
+"""
 struct ParseError <: Exception
     msg::String
 end
 
+"""
+    tryparse(::Type{PotentialName}, str::AbstractString)
+
+Attempt to parse a string into a `PotentialName` object.
+
+Otherwise, `nothing` is returned.
+
+# Arguments
+- `str::AbstractString`: The string to parse, e.g., `"Si"`, `"C_h_GW"`.
+"""
 function Base.tryparse(::Type{PotentialName}, str::AbstractString)
     str = convert(String, str)  # In case it's not a `String` so `match` won't work
     head_match = match(HEAD_REGEX, str)
@@ -42,6 +57,16 @@ function Base.tryparse(::Type{PotentialName}, str::AbstractString)
         element, num_electrons, pseudization, valence_states, rigidity, method, generation
     )
 end
+"""
+    tryparse(::Type{Subshell}, str::AbstractString)
+
+Attempt to parse a string into a `Subshell` object.
+
+Otherwise, `nothing` is returned.
+
+# Arguments
+- `str::AbstractString`: The string to parse, e.g., `"4s2"`, `"3d^{10.0}"`.
+"""
 function Base.tryparse(::Type{Subshell}, str::AbstractString)
     str = convert(String, str)  # In case it's not a `String` so `match` won't work
     matched = match(r"(\d+)([spdfghi])\^?{?" * FLOAT_REGEX * r"}?", str)

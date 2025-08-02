@@ -36,13 +36,37 @@ abstract type Generation end
 struct New <: Generation end
 struct Old <: Generation end
 
+"""
+    PotentialName(element, num_electrons, pseudization, valence_states, rigidity, method, generation)
+
+A composite type that represents a VASP pseudopotential by combining its constituent parts.
+
+The fields correspond to different components of the potential's name, such as the element,
+valence electron count, and method-specific suffixes. Unspecified components can be `nothing`.
+
+# Examples
+```jldoctest
+julia> PotentialName(:Si, nothing, nothing, nothing, nothing, nothing, nothing)
+Si
+
+julia> PotentialName(:Ti, nothing, nothing, nothing, Soft(), nothing, New())
+Ti_sv_new
+```
+"""
 struct PotentialName
+    "the chemical symbol of the element (e.g., `:H`, `:Si`)"
     element::Symbol
+    "the number of valence electrons"
     num_electrons::Maybe{NumberOfElectrons}
+    "the pseudization scheme (e.g., `AE()`)"
     pseudization::Maybe{Pseudization}
+    "specification of semicore or f-electron states"
     valence_states::Maybe{ValenceStates}
+    "the hardness or softness of the potential (e.g., `Hard()`)"
     rigidity::Maybe{Rigidity}
+    "the calculation method (e.g., `GW()`)"
     method::Maybe{Method}
+    "the generation of the potential (e.g., `New()`)"
     generation::Maybe{Generation}
 end
 
