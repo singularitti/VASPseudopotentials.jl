@@ -41,7 +41,7 @@ function Base.tryparse(::Type{PotentialName}, str::AbstractString)
         element, num_electrons, pseudization, valence_states, rigidity, method, generation
     )
 end
-function Base.tryparse(::Type{ElectronConfiguration}, str::AbstractString)
+function Base.tryparse(::Type{Subshell}, str::AbstractString)
     matched = match(r"(\d+)([spdfghi])\^?{?" * FLOAT_REGEX * r"}?", str)
     if length(matched) != 3
         return nothing
@@ -49,12 +49,12 @@ function Base.tryparse(::Type{ElectronConfiguration}, str::AbstractString)
     principal = parse(Int8, matched[1])
     azimuthal = AzimuthalQuantumNumber(Symbol(matched[2]))
     occupation = matched[3] === nothing ? 1.0 : parse(Float64, matched[3])
-    return ElectronConfiguration(principal, azimuthal, occupation)
+    return Subshell(principal, azimuthal, occupation)
 end
 
 function Base.parse(
     ::Type{T}, str::AbstractString
-) where {T<:Union{ElectronConfiguration,PotentialName}}
+) where {T<:Union{Subshell,PotentialName}}
     result = tryparse(T, str)
     if result === nothing
         throw(ParseError("could not parse type `$T` from \"$str\"!"))
