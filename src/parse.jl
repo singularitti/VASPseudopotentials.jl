@@ -6,6 +6,7 @@ struct ParseError <: Exception
 end
 
 function Base.tryparse(::Type{PotentialName}, str::AbstractString)
+    str = convert(String, str)  # In case it's not a `String` so `match` won't work
     head_match = match(HEAD_REGEX, str)
     if head_match === nothing
         return nothing
@@ -42,6 +43,7 @@ function Base.tryparse(::Type{PotentialName}, str::AbstractString)
     )
 end
 function Base.tryparse(::Type{Subshell}, str::AbstractString)
+    str = convert(String, str)  # In case it's not a `String` so `match` won't work
     matched = match(r"(\d+)([spdfghi])\^?{?" * FLOAT_REGEX * r"}?", str)
     if length(matched) != 3
         return nothing
@@ -52,9 +54,7 @@ function Base.tryparse(::Type{Subshell}, str::AbstractString)
     return Subshell(principal, azimuthal, occupation)
 end
 
-function Base.parse(
-    ::Type{T}, str::AbstractString
-) where {T<:Union{Subshell,PotentialName}}
+function Base.parse(::Type{T}, str::AbstractString) where {T<:Union{Subshell,PotentialName}}
     result = tryparse(T, str)
     if result === nothing
         throw(ParseError("could not parse type `$T` from \"$str\"!"))
