@@ -12,7 +12,7 @@ end
 
 count_valence_electrons(config) = sum(s.occupation for s in config)
 count_valence_electrons(subshell::Subshell) = subshell.occupation
-count_valence_electrons(::Missing) = 0
+count_valence_electrons(::Missing) = missing
 
 Base.:*(a::Subshell, b::Subshell) = [a, b]
 Base.:*(a::Subshell, b::AbstractVector) = [a; b]
