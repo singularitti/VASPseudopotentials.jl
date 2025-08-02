@@ -30,6 +30,7 @@ end
         end
         total = map(count_valence_electrons, parsed)
         bench = df[:, "Number of valence electrons"]
-        @test total ≈ bench atol = 1.1
+        indices = findall(!ismissing, total)
+        @test total[indices] ≈ bench[indices] atol = 0.01
     end
 end
