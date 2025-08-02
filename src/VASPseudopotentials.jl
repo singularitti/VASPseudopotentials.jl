@@ -1,6 +1,6 @@
 module VASPseudopotentials
 
-include("types.jl")
+include("name.jl")
 include("configuration.jl")
 include("parse.jl")
 
